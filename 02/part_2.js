@@ -5,13 +5,17 @@ import {
 
 const position = {
 	horizontal: 0,
-	depth: 0
+	depth: 0,
+	aim: 0
 }
 
 const instructionSet = {
-	"forward": (state, value) => state.horizontal += value,
-	"down": (state, value) => state.depth += value,
-	"up": (state, value) => state.depth -= value
+	"forward": (state, value) => {
+		state.horizontal += value;
+		state.depth += state.aim * value;
+	},
+	"down": (state, value) => state.aim += value,
+	"up": (state, value) => state.aim -= value
 };
 
 runProgram(instructionSet, position, input);
